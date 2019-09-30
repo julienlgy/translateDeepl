@@ -1,0 +1,54 @@
+Manuel d'utilisation de la classe TranslateDeepL
+
+\@ legayj
+
+*********************Initianilisation de la classe : $tr = new TranslateDeepl()
+  Paramètre du __construct :
+    From => Langue source (défaut auto-detect), il est préférable qu'elle soit
+    renseignée
+    To => Langue de destination, peut être sour forme d'une array avec toute les
+    langues sources possibles. Une seule en string fonctionne aussi
+    Texte => peut être renseigné au moment du construct, ou via setTexte(), ou bien lors de la traduction.
+    peut être séparé par une array
+
+Exemple : $tr = new TranslateDeepl('auto','EN',array("titre","chapo","texte"));
+Exemple : $tr = new TranslateDeepl(); => auto,all langs,""
+
+/!\ : Pour traduire en toute les langues, utiliser la constante TranslateDeepl::langs, toutefois veuillez à bien renseigner la langue source /!\
+
+********************* Accesseurs et mutateurs
+
+$tr->setTexte(** "texte" // array("texte","texte") **);
+$tr->setFrom("FR");
+$tr->setTo(** "EN" // array("FR,EN,DE") **);
+$tr->setMethod("post"/"get");
+$tr->setOptions($nom de l'option, $valeur);
+  voir la liste des options avec la constante TranslateDeepl::options
+
+$tr->getTexte();
+$tr->getFrom();
+$tr->getTo();
+$tr->getOptions();
+$tr->getMethod();
+
+Les setters renvoient l'instance, on peut donc faire $tr->setTexte()->setFrom()->setTo->translate()->getResponses();
+******************** Fonctions publiques
+
+$tr->checkValidateLang($lang);
+  renvoie un booléen pour savoir si la langue est supportée par deepl.
+
+$tr->debug();
+  affiche en ECHO l'état de la classe, les paramètres passées etc..
+
+$tr->translate(/* Optionel : texte */);
+  débute la traduction avec deepl, renvoie l'instance.
+
+$tr->getResponses(/* Optionel : 'fr','de'.. */) = renvoie une array contenant le texte traduit.
+
+Exemple :
+ $res = $tr->translate()->getResponses();
+
+ $allangs = $tr->translate()->getTo();
+ foreach($to, As $lang) {
+    $tr->getReponses($lang);var_dump($tr);
+  }

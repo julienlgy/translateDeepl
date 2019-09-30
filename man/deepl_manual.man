@@ -1,0 +1,40 @@
+*******************************************************************************
+
+    MANUEL D'UTILISATION DeepL | legayj 2018 | FR
+
+*******************************************************************************
+          EN / DE / FR / ES / IT / NL / PL
+*******************************************************************************
+
+Documentation pour la V1 /
+
+URL de l'api : https://api.deepl.com/v1/translate
+
+*******************************************************************************
+          REQUÊTE
+*******************************************************************************
+
+PARAMETRES PRINCIPAUX:
+  - text : obligatoirement en UTF8, peut être présent plusieurs fois dans une même requête
+  - source_lang : langue d'origine, le paramètre est facultatif (il y a la détection automatique)
+  - target_lang : langue où l'on souhaite une traduction
+  - auth_key : Obligatoire.
+
+PARAMETRES SECONDAIRES:
+  - tag_handling :
+  - non_splitting_tags :   Ces trois paramètres sont utilisés pour traduire du XML, permet de définir des normes.
+  - ignore_tags :
+  - split_sentences : Le traducteur divisera le résultat par phrase (défaut oui)
+  - preserve_formatting : garde des ponctuations et des majuscules présent initialement dans le texte. (défaut non)
+
+
+*******************************************************************************
+            REPONSE
+*******************************************************************************
+ Retourne un Content-Type application/json formulé comme suit :
+
+ { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] }
+
+ Si plusieurs texte :
+
+ { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" },{ "detected_source_language": "DE", "text": "Hello World!" },{ "detected_source_language": "DE", "text": "Hello World!" } ] }
